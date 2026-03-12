@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<!--
+  ╔══════════════════════════════════════════════════════════════════╗
+  ║  MANEL MONTERO — CV Web Personal                                 ║
+  ║  Archivo: index.html                                             ║
+  ║                                                                  ║
+  ║  ┌─────────────────────────────────────────────────────────┐    ║
+  ║  │  ⚙️  CONTROL DE ENLACES A GOOGLE DRIVE                   │    ║
+  ║  │                                                          │    ║
+  ║  │  Busca en el <script> al final del archivo:              │    ║
+  ║  │                                                          │    ║
+  ║  │    const MOSTRAR_ENLACES_DRIVE = false;                  │    ║
+  ║  │                                                          │    ║
+  ║  │  · false → los botones de Drive NO se muestran (defecto) │    ║
+  ║  │  · true  → se muestran los botones en TODOS los ítems    │    ║
+  ║  │                                                          │    ║
+  ║  │  Para añadir la URL de cada ítem, edita el atributo      │    ║
+  ║  │  data-drive="URL" del <div class="cv-item"> concreto.    │    ║
+  ║  └─────────────────────────────────────────────────────────┘    ║
+  ╚══════════════════════════════════════════════════════════════════╝
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Manel Montero · Ingeniero y Docente de Informática</title>
+  <link rel="stylesheet" href="estilos.css"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👨‍💻</text></svg>"/>
+</head>
+<body>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     HERO — Foto, Nombre y Perfil
+══════════════════════════════════════════════════════════════ -->
+<header id="hero">
+  <div class="hero-inner">
+
+    <div class="hero-photo-wrap">
+      <div class="ring ring-1"></div>
+      <div class="ring ring-2"></div>
+      <!-- Opción A: foto real → descomentar y sustituir "foto-perfil.jpg" -->
+      <!-- <img class="hero-photo" src="foto-perfil.jpg" alt="Foto de Manel Montero"/> -->
+      <!-- Opción B: avatar placeholder → borrar cuando uses foto real -->
+      <div class="hero-photo-placeholder">👨‍💻</div>
+    </div>
+
+    <div class="hero-text">
+      <div class="hero-badge">✅ Disponible para colaboraciones</div>
+      <h1 class="hero-name">Manel Montero</h1>
+      <p class="hero-title">Ingeniero y Docente de Informática</p>
+      <p class="hero-tagline">
+        Más de 20 años formando profesionales en tecnología y sistemas.
+        Especialista en desarrollo de software y sistemas de Gestión de Información.
+        Apasionado por la enseñanza y la innovación educativa.
+      </p>
+      <div class="hero-btns">
+        <a href="galeria.html" class="btn-hero primary">🖼 Ver Galería</a>
+        <a href="#footer"      class="btn-hero secondary">📬 Contáctame</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="6 9 12 15 18 9"/>
+    </svg>
+  </div>
+</header>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     NAVBAR SECUNDARIA
+══════════════════════════════════════════════════════════════ -->
+<nav id="navbar">
+  <div class="navbar-inner">
+    <span class="navbar-logo">M. Montero</span>
+    <div class="navbar-links">
+      <a href="#estudios">📚 Estudios</a>
+      <a href="#exp-nodoc">💼 Laboral</a>
+      <a href="#exp-doc">🏫 Docente</a>
+      <a href="#cursos">🎓 Cursos</a>
+      <a href="galeria.html" class="nav-galeria">🖼 Galería</a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     CV PRINCIPAL
+══════════════════════════════════════════════════════════════ -->
+<main id="cv-main">
+
+
+  <!-- ════════════════════════════════════════════════════════
+       SECCIÓN 1 — ESTUDIOS PRINCIPALES
+       ════════════════════════════════════════════════════════
+       Cada <div class="cv-item"> puede llevar:
+         data-drive="URL_GOOGLE_DRIVE"   → URL del documento
+         data-drive-label="Texto botón"  → texto del botón (opcional)
+       Si MOSTRAR_ENLACES_DRIVE = false, el bloque .cv-drive-row
+       queda oculto y no se muestra en absoluto.
+  ═════════════════════════════════════════════════════════ -->
+  <section class="cv-section" id="estudios">
+    <div class="cv-section-header">
+      <div class="cv-section-icon">📚</div>
+      <div>
+        <h2>Estudios Principales</h2>
+        <p class="section-subtitle">Formación académica y titulaciones oficiales</p>
+      </div>
+    </div>
+    <div class="cv-section-body">
+
+      <!-- ── Ingeniería Técnica ─────────────────────────────────── -->
+      <div class="cv-item"
+           data-drive=""
+           data-drive-label="Ver expediente académico">
+        <div class="cv-item-header">
+          <div>
+            <div class="cv-item-title">
+              Licenciado en Informática de Gestión
+              <span class="cv-badge blue">Titulado</span>
+            </div>
+            <div class="cv-item-org">Universidad Politécnica Cataluña · Facultad de Informática</div>
+          </div>
+          <span class="cv-badge-date">1994</span>
+        </div>
+        <p class="cv-item-desc">
+          Especialización en sistemas operativos, sistemas de gestión y programación estructurada.
+        </p>
+        <!-- .cv-drive-row: visible u oculto según MOSTRAR_ENLACES_DRIVE -->
+        <div class="cv-drive-row">
+          <a class="drive-link" href="#" target="_blank" rel="noopener">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            Ver diploma académico
+          </a>
+        </div>
+      </div>
+
+      <!-- ── Máster ─────────────────────────────────────────────── -->
+      <div class="cv-item"
+           data-drive=""
+           data-drive-label="Ver título de máster">
+        <div class="cv-item-header">
+          <div>
+            <div class="cv-item-title">
+              Máster en Business Administration
+              <span class="cv-badge teal">Posgrado</span>
+            </div>
+            <div class="cv-item-org">Escuela de Negocios de Andalucía</div>
+          </div>
+          <span class="cv-badge-date">2007</span>
+        </div>
+        <p class="cv-item-desc">
+          Especialización en gestión de empresas y proyectos.
+        </p>
+        <div class="cv-drive-row">
+          <a class="drive-link" href="#" target="_blank" rel="noopener">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            Ver título de máster
+          </a>
+        </div>
+      </div>
+
+      <!-- ── Certificación CCNA ─────────────────────────────────── -->
+      <!--
+        Este ítem tiene data-drive con URL real de ejemplo.
+        Cuando MOSTRAR_ENLACES_DRIVE = true, el botón aparece activo.
+      -->
+      <div class="cv-item"
+           data-drive="https://drive.google.com/file/d/EJEMPLO_ID/view"
+           data-drive-label="Ver certificado Cisco">
+        <div class="cv-item-header">
+          <div>
+            <div class="cv-item-title">
+              Certificación Cisco CCNA (Routing & Switching)
+              <span class="cv-badge green">Certificado</span>
+            </div>
+            <div class="cv-item-org">Cisco Networking Academy</div>
+          </div>
+          <span class="cv-badge-date">2005</span>
+        </div>
+        <p class="cv-item-desc">
+          Certificación internacional en configuración y mantenimiento de redes Cisco.
+          Conocimientos en enrutamiento, conmutación y troubleshooting.
+        </p>
+        <div class="cv-drive-row">
+          <a class="drive-link" href="#" target="_blank" rel="noopener">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            Ver certificado Cisco
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════════════════
+       SECCIÓN 2 — EXPERIENCIA LABORAL NO DOCENTE
+  ═════════════════════════════════════════════════════════ -->
+  <section class="cv-section" id="exp-nodoc">
+    <div class="cv-section-header">
+      <div class="cv-section-icon">💼</div>
+      <div>
+        <h2>Experiencia Laboral No Docente</h2>
+        <p class="section-subtitle">Trayectoria profesional en el sector privado y público</p>
+      </div>
+    </div>
+    <div class="cv-section-body">
+
+      <!-- ── Jefe de Proyecto IT ─────────────────────────────────── -->
+      <div class="cv-item"
+           data-drive=""
+           data-drive-label="Ver carta de recomendación">
+        <div class="cv-item-header">
+          <div>
+            <div class="cv-item-title">Jefe de Proyecto IT</div>
+            <div class="cv-item-org">Empresa Tecnológica S.L. · Sector privado</div>
+          </div>
+          <span class="cv-badge-date">2004 – 2010</span>
+        </div>
+        <p class="cv-item-desc">
+          Dirección y coordinación de proyectos de infraestructura tecnológica para clientes del sector
+          financiero y logístico. Gestión de equipos de hasta 12 técnicos.
+        </p>
+        <div class="cv-drive-row">
+          <a class="drive-link" href="#" target="_blank" rel="noopener">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            Ver carta de recomendación
+          </a>
+        </div>
+      </div>
+
+      <!-- ── Administrador de Sistemas ─────────────────────────── -->
+      <div class="cv-item"
+           data-drive=""
+           data-drive-label="Ver referencias laborales">
+        <div class="cv-item-header">
+          <div>
+            <div class="cv-item-title">Administrador de Sistemas y Redes</div>
+            <div class="cv-item-org">Consultora TIC · Servicios IT</div>
+          </div>
+          <span class="cv-badge-date">2000 – 2004</span>
+        </div>
+        <p class="cv-item-desc">
+          Administración de servidores Linux/Windows, gestión de redes corporativas,
+          virtualización con VMware y soporte técnico de nivel 2 y 3.
+        </p>
+        <div class="cv-drive-row">
+          <a class="drive-link" href="#" target="_blank" rel="noopener">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            Ver referencias laborales
+          </a>
+        </div>
+      </div>
+
+      <!-- ── Consultor Independiente ───────────────────────────── -->
+      <div class="cv-item"
+           data-drive=""
+           data-drive-label="Ver portfolio de proyectos">
+        <div class="cv-item-header">
+          <div>
+            <div class="cv-item-title">Consultor Tecnológico Independiente</div>
+            <div class="cv-item-org">Freelance · Proyectos propios</div>
+          </div>
+          <span class="cv-badge-date">2010 – Presente</span>
+        </div>
+        <p class="cv-item-desc">
+          Auditorías de seguridad, diseño de arquitecturas cloud, implementación de sistemas ERP
+          y asesoramiento a PYMES en transformación digital.
+        </p>
+        <div class="cv-drive-row">
+          <a class="drive-link" href="#" target="_blank" rel="noopener">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            Ver portfolio de proyectos
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════════════════
+       SECCIÓN 3 — EXPERIENCIA LABORAL DOCENTE
+  ═════════════════════════════════════════════════════════ -->
+  <section class="cv-section" id="exp-doc">
+    <div class="cv-section-header">
+      <div class="cv-section-icon">🏫</div>
+      <div>
+        <h2>Experiencia Laboral Docente</h2>
+        <p class="section-subtitle">Docencia en centros educativos y formación profesional</p>
+      </div>
+    </div>
+    <div class="cv-section-body">
+
+      <!-- ── Profesor de FP ─────────────────────────────────────── -->
+      <div class="cv-item"
+           data-drive=""
+           data-drive-label="Ver certificado de empresa">
+        <div class="cv-item-header">
+          <div>
+            <div class="cv-item-title">
+              Profesor de Formación Profesional — Informática y Comunicaciones
+              <span class="cv-badge blue">Funcionario</span>
+            </div>
+            <div class="cv-item-org">Instituto de Educación Secundaria · Consejería de Educación</div>
+          </div>
+          <span class="cv-badge-date">2010 – Presente</span>
+        </div>
+        <p class="cv-item-desc">
+          Impartición de módulos de Sistemas Operativos, Redes Locales, Programación, Bases de Datos
+          y Ciberseguridad en ciclos de Grado Medio y Superior. Tutorías de FCT.
+        </p>
+        <div class="cv-drive-row">
+          <a class="drive-link" href="#" target="_blank" rel="noopener">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            Ver certificado de empresa
+          </a>
+        </div>
+      </div>
+
+      <!-- ── Formador privado ───────────────────────────────────── -->
+      <div class="cv-item"
+           data-drive=""
+           data-drive-label="Ver materiales de formación">
+        <div class="cv-item-header">
+          <div>
+            <div class="cv-item-title">Formador Tecnológico · Empresas y Particulares</div>
+            <div class="cv-item-org">Centros de Formación Privados y Academia Propia</div>
+          </div>
+          <span class="cv-badge-date">2005 – Presente</span>
+        </div>
+        <p class="cv-item-desc">
+          Cursos de programación web (HTML, CSS, JS, Python), administración de sistemas,
+          ciberseguridad básica, ofimática avanzada y herramientas Google Workspace.
+        </p>
+        <div class="cv-drive-row">
+          <a class="drive-link" href="#" target="_blank" rel="noopener">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            Ver materiales de formación
+          </a>
+        </div>
+      </div>
+
+      <!-- ── Instructor Online ──────────────────────────────────── -->
+      <div class="cv-item"
+           data-drive=""
+           data-drive-label="Ver cursos publicados">
+        <div class="cv-item-header">
+          <div>
+            <div class="cv-item-title">Instructor Online · Plataformas E-Learning</div>
+            <div class="cv-item-org">Udemy · Moodle propio · YouTube Educativo</div>
+          </div>
+          <span class="cv-badge-date">2018 – Presente</span>
+        </div>
+        <p class="cv-item-desc">
+          Creación y publicación de cursos online de informática con más de 1.500 alumnos matriculados.
+          Especialidad en Python, redes y ciberseguridad para principiantes.
+        </p>
+        <div class="cv-drive-row">
+          <a class="drive-link" href="#" target="_blank" rel="noopener">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            Ver cursos publicados
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════════════════
+       SECCIÓN 4 — CURSOS DE CAPACITACIÓN RECIBIDOS
+  ═════════════════════════════════════════════════════════ -->
+  <section class="cv-section" id="cursos">
+    <div class="cv-section-header">
+      <div class="cv-section-icon">🎓</div>
+      <div>
+        <h2>Cursos de Capacitación Recibidos</h2>
+        <p class="section-subtitle">Formación continua y actualización profesional</p>
+      </div>
+    </div>
+    <div class="cv-section-body">
+
+      <!-- ── Ciberseguridad INCIBE ─────────────────────────────── -->
+      <div class="cv-item"
+           data-drive=""
+           data-drive-label="Ver diploma INCIBE">
+        <div class="cv-item-header">
+          <div>
+            <div class="cv-item-title">
+              Ciberseguridad Avanzada y Hacking Ético
+              <span class="cv-badge teal">120h</span>
+            </div>
+            <div class="cv-item-org">INCIBE · Instituto Nacional de Ciberseguridad</div>
+          </div>
+          <span class="cv-badge-date">2022</span>
+        </div>
+        <p class="cv-item-desc">
+          Análisis de vulnerabilidades, pentesting, seguridad en redes WiFi y protección de infraestructuras críticas.
+        </p>
+        <div class="cv-drive-row">
+          <a class="drive-link" href="#" target="_blank" rel="noopener">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            Ver diploma INCIBE
+          </a>
+        </div>
+      </div>
+
+      <!-- ── IA para Docentes ───────────────────────────────────── -->
+      <div class="cv-item"
+           data-drive=""
+           data-drive-label="Ver certificado Google">
+        <div class="cv-item-header">
+          <div>
+            <div class="cv-item-title">
+              Inteligencia Artificial y Machine Learning para Docentes
+              <span class="cv-badge blue">80h</span>
+            </div>
+            <div class="cv-item-org">Google for Education · Coursera</div>
+          </div>
+          <span class="cv-badge-date">2023</span>
+        </div>
+        <p class="cv-item-desc">
+          Aplicación de herramientas de IA en el aula, diseño de actividades con LLMs y uso responsable de la IA.
+        </p>
+        <div class="cv-drive-row">
+          <a class="drive-link" href="#" target="_blank" rel="noopener">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            Ver certificado Google
+          </a>
+        </div>
+      </div>
+
+      <!-- ── DevOps ─────────────────────────────────────────────── -->
+      <div class="cv-item"
+           data-drive=""
+           data-drive-label="Ver certificado Linux Foundation">
+        <div class="cv-item-header">
+          <div>
+            <div class="cv-item-title">
+              DevOps, Docker y Kubernetes
+              <span class="cv-badge green">60h</span>
+            </div>
+            <div class="cv-item-org">Linux Foundation · Edición Online</div>
+          </div>
+          <span class="cv-badge-date">2021</span>
+        </div>
+        <p class="cv-item-desc">
+          Contenedores Docker, orquestación con Kubernetes, CI/CD con GitHub Actions
+          e infraestructura como código con Terraform.
+        </p>
+        <div class="cv-drive-row">
+          <a class="drive-link" href="#" target="_blank" rel="noopener">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            Ver certificado Linux Foundation
+          </a>
+        </div>
+      </div>
+
+      <!-- ── Metodologías Ágiles ─────────────────────────────────── -->
+      <div class="cv-item"
+           data-drive=""
+           data-drive-label="Ver diploma INTEF">
+        <div class="cv-item-header">
+          <div>
+            <div class="cv-item-title">
+              Metodologías Ágiles en el Aula (Scrum Educativo)
+              <span class="cv-badge blue">40h</span>
+            </div>
+            <div class="cv-item-org">INTEF · Instituto Nacional de Tecnologías Educativas</div>
+          </div>
+          <span class="cv-badge-date">2020</span>
+        </div>
+        <p class="cv-item-desc">
+          Aplicación de Scrum y Design Thinking en entornos de aprendizaje activo.
+          Gestión de proyectos colaborativos con alumnado de FP.
+        </p>
+        <div class="cv-drive-row">
+          <a class="drive-link" href="#" target="_blank" rel="noopener">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            Ver diploma INTEF
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+</main>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     FOOTER — REDES SOCIALES Y CONTACTO
+══════════════════════════════════════════════════════════════ -->
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+
+      <!-- Columna 1: Perfil -->
+      <div class="footer-profile">
+        <h3>Manel Montero</h3>
+        <p>Ingeniero y Docente de Informática.<br>
+        Formador, consultor tecnológico y apasionado de la educación digital.<br>
+        Disponible para colaboraciones, formaciones y proyectos.</p>
+        <div style="margin-top:16px;">
+          <a href="galeria.html" style="
+            display:inline-flex; align-items:center; gap:8px;
+            background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.2);
+            color:#c2e0f4; padding:8px 18px; border-radius:10px;
+            font-size:.82rem; font-weight:600; text-decoration:none;">
+            🖼 Ver galería de logros
+          </a>
+        </div>
+      </div>
+
+      <!-- Columna 2: Redes sociales -->
+      <div class="footer-social">
+        <h4>Redes y Comunidades</h4>
+        <div class="social-grid">
+          <!-- Sustituir # por la URL real de cada red -->
+          <a class="social-link" href="https://www.linkedin.com/in/tu-perfil" target="_blank" rel="noopener">
+            <div class="social-icon li">in</div>
+            <span>LinkedIn · Perfil Profesional</span>
+          </a>
+          <a class="social-link" href="https://www.facebook.com/tu-perfil" target="_blank" rel="noopener">
+            <div class="social-icon fb">f</div>
+            <span>Facebook · Página Docente</span>
+          </a>
+          <a class="social-link" href="https://twitter.com/tu-usuario" target="_blank" rel="noopener">
+            <div class="social-icon tw">𝕏</div>
+            <span>Twitter · @tu_usuario</span>
+          </a>
+          <a class="social-link" href="https://youtube.com/@tu-canal" target="_blank" rel="noopener">
+            <div class="social-icon yt">▶</div>
+            <span>YouTube · Canal Formativo</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Columna 3: Contacto directo -->
+      <div class="footer-contact">
+        <h4>Contacto Directo</h4>
+        <div class="footer-contact-item">
+          <span class="ic">📧</span>
+          <a href="mailto:manel.montero@ejemplo.es" style="color:var(--b3); text-decoration:none;">
+            manel.montero@ejemplo.es
+          </a>
+        </div>
+        <div class="footer-contact-item">
+          <span class="ic">📱</span>
+          <span>+34 6XX XXX XXX</span>
+        </div>
+        <div class="footer-contact-item">
+          <span class="ic">📍</span>
+          <span>España · Disponible online</span>
+        </div>
+        <div class="footer-contact-item">
+          <span class="ic">🌐</span>
+          <a href="#" style="color:var(--b3); text-decoration:none;">manelmontero.es</a>
+        </div>
+        <div style="margin-top:18px;">
+          <a href="mailto:manel.montero@ejemplo.es" style="
+            display:inline-flex; align-items:center; gap:7px;
+            background:var(--b4); color:white;
+            padding:9px 20px; border-radius:10px;
+            font-size:.82rem; font-weight:600; text-decoration:none;">
+            ✉️ Enviarme un email
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2025 Manel Montero · CV Web Personal</span>
+      <span>
+        <a href="galeria.html">🖼 Galería</a>
+        &nbsp;·&nbsp;
+        <a href="#hero">↑ Volver arriba</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════════════════════════ -->
+<script>
+
+/* ════════════════════════════════════════════════════════════════
+   ⚙️  CONTROL GLOBAL DE ENLACES A GOOGLE DRIVE
+   ════════════════════════════════════════════════════════════════
+
+   CAMBIA SOLO ESTA LÍNEA para mostrar u ocultar TODOS los botones
+   de documentación de Google Drive en el CV:
+
+     false  →  los botones de Drive NO se muestran (modo público limpio)
+     true   →  aparece el botón "Ver en Google Drive" en CADA ítem
+
+   ─────────────────────────────────────────────────────────────────
+   Cuando lo pongas a true, cada botón abrirá la URL que hayas
+   indicado en el atributo  data-drive="..."  del <div class="cv-item">.
+
+   Si data-drive está vacío (""), el botón se muestra en gris con
+   el aviso "Sin URL configurada" para recordarte que falta la URL.
+   ════════════════════════════════════════════════════════════════ */
+
+const MOSTRAR_ENLACES_DRIVE = false;   /* ← CAMBIA AQUÍ: true | false */
+
+/* ─────────────────────────────────────────────────────────────────
+   applyDriveLinks()
+   Lee MOSTRAR_ENLACES_DRIVE y actúa sobre TODOS los .cv-drive-row:
+
+   · Si false → oculta la fila entera (display:none). El visitante
+                no ve ni rastro del botón ni del control.
+
+   · Si true  → muestra la fila y configura el enlace:
+                  · URL válida en data-drive  → botón activo, abre Drive
+                  · data-drive vacío          → botón gris, aviso visual
+   ───────────────────────────────────────────────────────────────── */
+function applyDriveLinks() {
+
+  document.querySelectorAll('.cv-drive-row').forEach(row => {
+
+    if (!MOSTRAR_ENLACES_DRIVE) {
+      row.style.display = 'none';   /* ocultar completamente */
+      return;
+    }
+
+    /* Mostrar la fila */
+    row.style.display = 'flex';
+
+    /* Leer la URL y la etiqueta del cv-item padre */
+    const cvItem   = row.closest('.cv-item');
+    const driveUrl = (cvItem && cvItem.dataset.drive) ? cvItem.dataset.drive.trim() : '';
+    const link     = row.querySelector('.drive-link');
+
+    if (driveUrl !== '') {
+      /* URL configurada: botón funcional */
+      link.href              = driveUrl;
+      link.style.opacity     = '1';
+      link.style.cursor      = 'pointer';
+      link.style.pointerEvents = 'auto';
+      link.removeAttribute('title');
+    } else {
+      /* Sin URL: botón desactivado con aviso */
+      link.href              = '#';
+      link.style.opacity     = '0.45';
+      link.style.cursor      = 'help';
+      link.style.pointerEvents = 'none';
+      link.title             = '⚠️ Falta la URL — añade data-drive="https://drive.google.com/..." en el cv-item';
+      /* Cambiar texto del enlace */
+      const lastText = Array.from(link.childNodes)
+                            .find(n => n.nodeType === Node.TEXT_NODE);
+      if (lastText) lastText.textContent = ' Sin URL configurada';
+    }
+
+  });
+}
+
+/* Ejecutar al cargar */
+applyDriveLinks();
+
+
+/* ─────────────────────────────────────────────────────────────────
+   Navbar activa según scroll
+   ───────────────────────────────────────────────────────────────── */
+const navLinks = document.querySelectorAll('.navbar-links a[href^="#"]');
+const sections = ['estudios', 'exp-nodoc', 'exp-doc', 'cursos']
+                 .map(id => document.getElementById(id));
+
+function updateNav() {
+  const scrollY = window.scrollY + 80;
+  let active = sections[0];
+  sections.forEach(sec => { if (sec && sec.offsetTop <= scrollY) active = sec; });
+  navLinks.forEach(a => {
+    a.classList.toggle('active',
+      a.getAttribute('href') === '#' + (active ? active.id : ''));
+  });
+}
+window.addEventListener('scroll', updateNav, { passive: true });
+updateNav();
+
+</script>
+</body>
+</html>

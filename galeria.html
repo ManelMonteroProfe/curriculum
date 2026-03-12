@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<!--
+  ╔══════════════════════════════════════════════════════════════════╗
+  ║  MANEL MONTERO — Galería de Logros y Especialidades              ║
+  ║  Archivo: galeria.html                                           ║
+  ║                                                                  ║
+  ║  CÓMO USAR TUS PROPIAS IMÁGENES:                                ║
+  ║    1. Crea la carpeta  galeria/  junto a este archivo            ║
+  ║    2. Copia tus imágenes dentro  (jpg, png, webp…)               ║
+  ║    3. En el array `slides`, cambia el tipo a 'img' y             ║
+  ║       pon la ruta en el campo `src`:                             ║
+  ║         { type: 'img', src: 'galeria/foto.jpg', … }             ║
+  ║    4. Los slides de tipo 'content' usan HTML interno             ║
+  ║       (sin imagen, solo texto + icono + CTA)                    ║
+  ╚══════════════════════════════════════════════════════════════════╝
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Galería · Manel Montero</title>
+  <link rel="stylesheet" href="estilos.css"/>
+</head>
+<body>
+
+<!-- Botón volver al CV -->
+<a class="gallery-back" href="index.html">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+    <polyline points="15 18 9 12 15 6"/>
+  </svg>
+  Volver al CV
+</a>
+
+<div class="gallery-page">
+
+  <!-- Cabecera -->
+  <div class="gallery-header">
+    <h1>🏆 Galería de Logros y Servicios</h1>
+    <p>
+      Descubre mis especialidades, logros y cómo puedo ayudarte.<br>
+      ¿Te interesa colaborar? ¡Contáctame!
+    </p>
+  </div>
+
+  <!-- Slideshow principal -->
+  <div class="slideshow-wrap" id="slideshow">
+
+    <!--
+      SLIDES DE CONTENIDO (type: 'content')
+      ─────────────────────────────────────────────────────────────────
+      Cada slide se crea dinámicamente por JavaScript a partir del
+      array `slides` definido en el <script> de este archivo.
+
+      Para añadir una imagen real:
+        { type: 'img', src: 'galeria/mi-imagen.jpg', caption: 'Mi logro' }
+
+      Para slide de texto/CTA:
+        { type: 'content', icon:'🎯', title:'Título', body:'Texto', cta:'Acción', link:'#' }
+    -->
+
+    <!-- Barra de progreso (se anima con JS) -->
+    <div class="slide-progress" id="slide-progress"></div>
+
+  </div><!-- fin slideshow-wrap -->
+
+  <!-- Contador y controles -->
+  <div class="gallery-controls" style="margin-top:22px;">
+    <button class="gallery-btn" onclick="prevSlide()">◀</button>
+    <div class="gallery-dots" id="gallery-dots"></div>
+    <button class="gallery-btn" onclick="nextSlide()">▶</button>
+  </div>
+
+  <div class="gallery-counter" id="gallery-counter" style="margin-top:12px;">1 / 1</div>
+
+  <!-- Botón pausa/play -->
+  <div style="margin-top:14px; display:flex; gap:12px; align-items:center;">
+    <button class="gallery-btn" id="btn-pause" onclick="togglePause()">⏸ Pausar</button>
+    <a href="index.html#footer" class="gallery-btn" style="text-decoration:none;">
+      ✉️ Contactar ahora
+    </a>
+  </div>
+
+</div><!-- fin gallery-page -->
+
+<script>
+/*
+  ═══════════════════════════════════════════════════════════════════
+  ARRAY `slides` — CONTENIDO DE LA GALERÍA
+  ═══════════════════════════════════════════════════════════════════
+
+  Cada slide puede ser de dos tipos:
+
+  TIPO 'content' (slide de texto con icono y CTA):
+    {
+      type:  'content',
+      icon:  '🎯',             ← emoji grande decorativo
+      title: 'Título',         ← título principal
+      body:  'Descripción…',   ← párrafo descriptivo
+      cta:   'Texto botón',    ← texto del botón de llamada a acción
+      link:  'index.html#footer'  ← URL del botón (email, sección, etc.)
+      bg:    'linear-gradient(…)' ← gradiente de fondo opcional
+    }
+
+  TIPO 'img' (slide con imagen real de la carpeta galeria/):
+    {
+      type:    'img',
+      src:     'galeria/mi-foto.jpg',   ← ruta de la imagen
+      caption: 'Pie de foto opcional'
+    }
+
+  El slideshow avanza automáticamente cada INTERVAL_MS milisegundos.
+  ═══════════════════════════════════════════════════════════════════
+*/
+const slides = [
+
+  /* ── Slide 1: Bienvenida / Presentación ── */
+  {
+    type:  'content',
+    icon:  '👨‍💻',
+    title: '20+ Años Formando Profesionales',
+    body:  'Ingeniero informático y docente con amplia experiencia en FP, formación empresarial y consultoría tecnológica.',
+    cta:   '📬 Contáctame',
+    link:  'index.html#footer',
+    bg:    'linear-gradient(135deg, #1a5278 0%, #2878a8 60%, #4fa3d1 100%)'
+  },
+
+  /* ── Slide 2: Logros académicos ── */
+  {
+    type:  'content',
+    icon:  '🏆',
+    title: '+1.500 Alumnos Formados Online',
+    body:  'Cursos publicados en plataformas de e-learning con valoraciones superiores a 4.8/5 y alumnos de toda España.',
+    cta:   '🎓 Ver mis cursos',
+    link:  'index.html#exp-doc',
+    bg:    'linear-gradient(135deg, #0f3450 0%, #1a5278 55%, #2878a8 100%)'
+  },
+
+  /* ── Slide 3: ¿En qué te puedo ayudar? ── */
+  {
+    type:  'content',
+    icon:  '🤝',
+    title: '¿En Qué Te Puedo Ayudar?',
+    body:  'Formación IT personalizada · Consultoría tecnológica · Auditorías de seguridad · Proyectos web · Transformación digital para PYMES.',
+    cta:   '💬 Hablemos',
+    link:  'index.html#footer',
+    bg:    'linear-gradient(135deg, #164a6a 0%, #236a94 55%, #3a90bf 100%)'
+  },
+
+  /* ── Slide 4: Especialidades docentes ── */
+  {
+    type:  'content',
+    icon:  '📡',
+    title: 'Especialidades Formativas',
+    body:  'Redes y Ciberseguridad · Programación (Python, JS, PHP) · Sistemas Operativos · Cloud y DevOps · Inteligencia Artificial aplicada.',
+    cta:   '📚 Ver temario completo',
+    link:  'index.html#exp-doc',
+    bg:    'linear-gradient(135deg, #1e3a5f 0%, #2d6491 55%, #4a90c0 100%)'
+  },
+
+  /* ── Slide 5: Imagen propia (ejemplo) ── */
+  /* Para activar, descomentar y añadir la imagen en galeria/ */
+  /*
+  {
+    type:    'img',
+    src:     'galeria/clase-redes.jpg',
+    caption: 'Taller de Redes en IES — Junio 2024'
+  },
+  */
+
+  /* ── Slide 6: Consultoría para empresas ── */
+  {
+    type:  'content',
+    icon:  '🏢',
+    title: 'Consultoría Tecnológica para Empresas',
+    body:  'Acompaño a empresas y autónomos en su digitalización: infraestructura, seguridad, formación de equipos y optimización de procesos.',
+    cta:   '📊 Solicitar propuesta',
+    link:  'index.html#footer',
+    bg:    'linear-gradient(135deg, #122b45 0%, #1e4f77 55%, #3278a8 100%)'
+  },
+
+  /* ── Slide 7: Formación online ── */
+  {
+    type:  'content',
+    icon:  '🎥',
+    title: 'Aprende Desde Cualquier Lugar',
+    body:  'Formación 100% online en directo y en diferido. Clases en vivo, materiales descargables y soporte continuo por email y Discord.',
+    cta:   '🚀 Empezar ahora',
+    link:  'index.html#footer',
+    bg:    'linear-gradient(135deg, #1a4060 0%, #286090 55%, #3d8cbf 100%)'
+  },
+
+  /* ── Slide 8: Logro — Ciberseguridad ── */
+  {
+    type:  'content',
+    icon:  '🔐',
+    title: 'Experto en Ciberseguridad',
+    body:  'Certificado por INCIBE. Auditor de seguridad, pentester y formador en ciberseguridad para empresas y centros educativos.',
+    cta:   '🛡️ Ver certificaciones',
+    link:  'index.html#cursos',
+    bg:    'linear-gradient(135deg, #0e2d48 0%, #1a4c70 55%, #2e7099 100%)'
+  },
+
+  /* ── Slide 9: Llamada a la acción final ── */
+  {
+    type:  'content',
+    icon:  '✉️',
+    title: '¡Trabajemos Juntos!',
+    body:  'Si tienes un proyecto, necesitas formación o quieres asesoramiento tecnológico, escríbeme. Primera consulta gratuita.',
+    cta:   '📩 Contactar ahora',
+    link:  'index.html#footer',
+    bg:    'linear-gradient(135deg, var(--b6, #1a5278) 0%, var(--b4, #4fa3d1) 100%)'
+  },
+
+]; /* fin array slides */
+
+
+/*
+  ══════════════════════════════════════════════════════════════════
+  CONFIGURACIÓN
+  ══════════════════════════════════════════════════════════════════
+*/
+const INTERVAL_MS = 3000; /* milisegundos por slide (3 segundos) */
+
+
+/*
+  ══════════════════════════════════════════════════════════════════
+  VARIABLES DE ESTADO
+  ══════════════════════════════════════════════════════════════════
+*/
+let currentIndex = 0;
+let timer        = null;
+let paused       = false;
+let progressTimer = null;
+const slideElements = [];
+
+
+/*
+  ──────────────────────────────────────────────────────────────────
+  init() — Construye el DOM del slideshow y arranca el timer
+  ──────────────────────────────────────────────────────────────────
+*/
+function init() {
+  const container   = document.getElementById('slideshow');
+  const dotsWrap    = document.getElementById('gallery-dots');
+  const progressBar = document.getElementById('slide-progress');
+
+  slides.forEach((slide, i) => {
+    let el;
+
+    if (slide.type === 'img') {
+      /* Slide de imagen */
+      el = document.createElement('img');
+      el.src = slide.src;
+      el.alt = slide.caption || ('Slide ' + (i+1));
+      el.className = 'slide-item' + (i === 0 ? ' active' : '');
+    } else {
+      /* Slide de contenido (texto + icono + CTA) */
+      el = document.createElement('div');
+      el.className = 'slide-item' + (i === 0 ? ' active' : '');
+      if (slide.bg) el.style.background = slide.bg;
+      el.innerHTML = `
+        <div class="slide-icon">${slide.icon || '⭐'}</div>
+        <h2>${slide.title}</h2>
+        <p>${slide.body}</p>
+        ${slide.cta && slide.link
+          ? `<a href="${slide.link}" class="slide-cta">${slide.cta}</a>`
+          : ''}
+      `;
+    }
+
+    /* Insertar antes de la barra de progreso */
+    container.insertBefore(el, progressBar);
+    slideElements.push(el);
+
+    /* Punto de navegación */
+    const dot = document.createElement('button');
+    dot.className = 'gallery-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Ir al slide ' + (i+1));
+    dot.onclick = () => goTo(i);
+    dotsWrap.appendChild(dot);
+  });
+
+  updateCounter();
+  startTimer();
+  animateProgress();
+}
+
+
+/*
+  goTo(index) — Navega al slide con ese índice (bucle infinito)
+*/
+function goTo(index) {
+  const dots = document.querySelectorAll('.gallery-dot');
+
+  slideElements[currentIndex].classList.remove('active');
+  dots[currentIndex].classList.remove('active');
+
+  currentIndex = ((index % slides.length) + slides.length) % slides.length;
+
+  slideElements[currentIndex].classList.add('active');
+  dots[currentIndex].classList.add('active');
+
+  updateCounter();
+  resetProgress();
+}
+
+function nextSlide() { goTo(currentIndex + 1); if (!paused) restartTimer(); }
+function prevSlide() { goTo(currentIndex - 1); if (!paused) restartTimer(); }
+
+function updateCounter() {
+  document.getElementById('gallery-counter').textContent =
+    (currentIndex + 1) + ' / ' + slides.length;
+}
+
+
+/*
+  Timer automático
+*/
+function startTimer() {
+  timer = setInterval(() => goTo(currentIndex + 1), INTERVAL_MS);
+}
+
+function restartTimer() {
+  clearInterval(timer);
+  startTimer();
+}
+
+function togglePause() {
+  const btn = document.getElementById('btn-pause');
+  if (paused) {
+    startTimer();
+    animateProgress();
+    btn.textContent = '⏸ Pausar';
+    paused = false;
+  } else {
+    clearInterval(timer);
+    clearInterval(progressTimer);
+    btn.textContent = '▶ Reanudar';
+    paused = true;
+  }
+}
+
+
+/*
+  Barra de progreso animada
+*/
+function animateProgress() {
+  const bar = document.getElementById('slide-progress');
+  if (!bar) return;
+  bar.style.transition = 'none';
+  bar.style.width = '0%';
+  /* Forzar reflow */
+  bar.offsetWidth;
+  bar.style.transition = `width ${INTERVAL_MS}ms linear`;
+  bar.style.width = '100%';
+}
+
+function resetProgress() {
+  animateProgress();
+}
+
+
+/* Controles de teclado */
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight') { nextSlide(); }
+  if (e.key === 'ArrowLeft')  { prevSlide(); }
+  if (e.key === ' ')          { e.preventDefault(); togglePause(); }
+});
+
+/* Arrancar */
+init();
+</script>
+
+</body>
+</html>
